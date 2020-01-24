@@ -6,7 +6,19 @@ import sys
 # a solution that is more efficient than the naive 
 # recursive solution
 def eating_cookies(n, cache=None):
-  pass
+  # establish base cases: 0, 1, 2, 3
+    # adding "or type(cache) == list" bc it will overwrite the array
+    # cache and replace it with a dictionary cache
+    # all caching is in key, value pairs
+    if cache is None or type(cache) == list:
+          cache = {0: 1, 1: 1, 2: 2}
+    # make a cache available to the recursive function through multiple recursive calls
+    if n < 0:
+          return 0
+    elif n not in cache:
+          cache[n] = eating_cookies(n - 1, cache) + eating_cookies(n - 2, cache) + eating_cookies(n - 3, cache)
+    return cache[n]
+  
 
 if __name__ == "__main__":
   if len(sys.argv) > 1:
